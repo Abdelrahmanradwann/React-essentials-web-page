@@ -10,7 +10,7 @@ function App() {
   let [selectedTab, setSelectedTab] = useState('');
 
   function handleSelect(item) {
-    selectedTab = setSelectedTab(item)
+    setSelectedTab(item)
   }
   console.log(selectedTab)
 
@@ -20,26 +20,28 @@ function App() {
       <main>
         <section id="core-concepts">
           <ul>
-            <CoreConcept
-              title={CORE_CONCEPTS[0].title}
-              image={CORE_CONCEPTS[0].image}
-              description={CORE_CONCEPTS[0].description}
-            />
-            
-            <CoreConcept {...CORE_CONCEPTS[1]}/>  
-              
-            <CoreConcept {...CORE_CONCEPTS[2]}/>
+          
+            {
+              CORE_CONCEPTS.map((conceptItem) => {
+                return <CoreConcept key = {conceptItem.title} {...conceptItem}/>
+              })
+            }
 
-            <CoreConcept {...CORE_CONCEPTS[3]} />
           </ul>
         </section>
 
         <section id="examples">
           <menu>
-            <TabButton isSelected={selectedTab=='components'} onSelect = {() => handleSelect('components')} >Component</TabButton>
+             {
+              CORE_CONCEPTS.map((i) => {
+                return <TabButton isSelected={selectedTab==i.title.toLowerCase()} onSelect = {() => handleSelect(i.title.toLowerCase())} >{i.title}</TabButton>
+              })
+            } 
+            
+            {/* <TabButton isSelected={selectedTab=='components'} onSelect = {() => handleSelect('components')} >Component</TabButton>
             <TabButton isSelected={selectedTab=='jsx'} onSelect = {() => handleSelect('jsx')} >JSX</TabButton>
             <TabButton isSelected={selectedTab=='props'} onSelect = {() => handleSelect('props')} >Props</TabButton>
-            <TabButton isSelected={selectedTab=='state'} onSelect = {() => handleSelect('state')} >State</TabButton>
+            <TabButton isSelected={selectedTab=='state'} onSelect = {() => handleSelect('state')} >State</TabButton> */}
           </menu>
           {!selectedTab && <p>Please select a topic</p>}
           {selectedTab && <div id='tab-content'>
