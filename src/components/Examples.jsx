@@ -16,7 +16,7 @@ export default function Examples() {
             <Tabs buttons = { CORE_CONCEPTS.map((i) => {
                 return <TabButton isSelected={selectedTab==i.title.toLowerCase()} onSelect = {() => handleSelect(i.title.toLowerCase())} >{i.title}</TabButton>
              })
-            }>          
+            } container = "menu">          
             {selectedTab &&
                 <div id='tab-content'>
                     <h2> {EXAMPLES[selectedTab].title} </h2>

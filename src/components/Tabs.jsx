@@ -1,11 +1,13 @@
 
 
-export default function Tabs({ buttons, children}) {
+export default function Tabs({ buttons, children, container = 'menu' }) {
+    // C in Container should be capital cuz if it is small react will look for built in container
+    let Container = container   
     return (
         <>
-            <menu>
+            <Container>
                 {buttons}
-            </menu>
+            </Container>
             {children}
         </>
 
